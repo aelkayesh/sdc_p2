@@ -14,14 +14,15 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./examples/visualization.jpg "Visualization"
-[image2]: ./examples/grayscale.jpg "Grayscaling"
-[image3]: ./examples/random_noise.jpg "Random Noise"
-[image4]: ./examples/placeholder.png "Traffic Sign 1"
-[image5]: ./examples/placeholder.png "Traffic Sign 2"
-[image6]: ./examples/placeholder.png "Traffic Sign 3"
-[image7]: ./examples/placeholder.png "Traffic Sign 4"
-[image8]: ./examples/placeholder.png "Traffic Sign 5"
+[image1]: ./doc/vis1.png "Visualization of training input after converting to grayscale"
+[image2]: ./doc/vis2.png "Visualization of test input in grayscale"
+[image3]: ./doc/vis3.png "Visualization of training input after masking"
+[image3]: ./doc/vis4.png "Visualization of test input after masking"
+[image5]: ./20km.png "Traffic Sign 1"
+[image6]: ./50km.png "Traffic Sign 2"
+[image7]: ./80km.png "Traffic Sign 3"
+[image8]: ./noentry.png "Traffic Sign 4"
+[image9]: ./roundabout.png "Traffic Sign 5"
 
 ## Rubric Points
 ###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -68,6 +69,8 @@ As a first step, I decided to convert the images to grayscale because it's easie
 
 Before normalization I tried adding a mask to give higher weights to the pixles in the center and the weights gradually decrease as we approache the edges. I think I need to work on the mask a bit more later, for the moment, I disabled it. The reason for thinking about a mask here, is that I noticed that in the training set, the traffic signs does not fill the whole 32x32 images, the sign itself is in the center but it does not fill the whole image, so it's good to get rid of the surroundings.
 
+Here is how the input looks after applying the mask
+![alt text][image2]
 
 As a last step, I normalized the image data because this makes the network focus on pixels with higher intensities
 
@@ -79,6 +82,15 @@ To cross validate my model, I randomly split the training data into a training s
 
 My final training set had 5 number of images. My validation set had over 1000 images.
 
+Here is how the test images looked like after applying grayscale
+
+![alt text][image3]
+
+
+
+and then after applying masking
+
+![alt text][image4]
 
 
 ####3. Describe, and identify where in your code, what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
