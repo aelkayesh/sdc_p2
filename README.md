@@ -70,7 +70,7 @@ As a first step, I decided to convert the images to grayscale because it's easie
 Before normalization I tried adding a mask to give higher weights to the pixles in the center and the weights gradually decrease as we approache the edges. I think I need to work on the mask a bit more later, for the moment, I disabled it. The reason for thinking about a mask here, is that I noticed that in the training set, the traffic signs does not fill the whole 32x32 images, the sign itself is in the center but it does not fill the whole image, so it's good to get rid of the surroundings.
 
 Here is how the input looks after applying the mask
-![alt text][image2]
+![alt text][image3]
 
 As a last step, I normalized the image data because this makes the network focus on pixels with higher intensities
 
@@ -84,7 +84,7 @@ My final training set had 5 number of images. My validation set had over 1000 im
 
 Here is how the test images looked like after applying grayscale
 
-![alt text][image3]
+![alt text][image2]
 
 
 
