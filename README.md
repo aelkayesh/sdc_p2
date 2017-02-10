@@ -18,11 +18,11 @@ The goals / steps of this project are the following:
 [image2]: ./doc/vis2.PNG "Visualization of test input in grayscale"
 [image3]: ./doc/vis3.PNG "Visualization of training input after masking"
 [image4]: ./doc/vis4.PNG "Visualization of test input after masking"
-[image5]: ./20km.png "Traffic Sign 1"
-[image6]: ./50km.png "Traffic Sign 2"
-[image7]: ./80km.png "Traffic Sign 3"
-[image8]: ./noentry.png "Traffic Sign 4"
-[image9]: ./roundabout.png "Traffic Sign 5"
+[image5]: ./20km.png " Speed limit 20 km"
+[image6]: ./50km.png " Speed limit 50 km"
+[image7]: ./80km.png " Speed limit 80 km"
+[image8]: ./noentry.png "No entry"
+[image9]: ./roundabout.png "Roundabout mandatory"
 
 ## Rubric Points
 ###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -82,13 +82,12 @@ To cross validate my model, I randomly split the training data into a training s
 
 My final training set had 5 number of images. My validation set had over 1000 images.
 
-Here is how the test images looked like after applying grayscale
+Here is how the test images looked like after applying grayscale...
 
 ![alt text][image2]
 
 
-
-and then after applying masking
+and then after applying masking...
 
 ![alt text][image4]
 
@@ -127,8 +126,9 @@ To train the model, I used softmax cross entropy to calculate the loss, then the
 The code for calculating the accuracy of the model is located in the ninth cell of the Ipython notebook.
 
 My final model results were:
+*training set accuracy up to %99.4
 * validation set accuracy of %93
-* test set accuracy ranging between %20 and %60
+* test set accuracy ranging between %20 and %60 (I didn't re-run the test phase, it was a complete restart of the kernel)
 
 If an iterative approach was chosen:
 * What was the first architecture that was tried and why was it chosen?
@@ -139,13 +139,16 @@ If an iterative approach was chosen:
 
 If a well known architecture was chosen:
 * What architecture was chosen? 
-I chose the LeNet architecture
+I choose the LeNet architecture
 
 * Why did you believe it would be relevant to the traffic sign application? 
 Using a combination of convolutions and activations and full connected networks, we can teach the model to learn about most important features of each traffic sign without explicitly telling the model how each sign looks like, i.e without telling it that the number 8 for example is composed of 2 small circles one above the other or the no-entry sign is a big red circle with a white recatangle in the middle.
 
 * How does the final model's accuracy on the training, validation and test set provide evidence that the model is working well?
- The model's accuracy on training data is and on validation data is and on test data is.
+ The model's accuracy on training data is very high and on validation data is less accurate since it's not seeing validation data as much as it sees training data, and of course the accuracy of test data is much lower since it came from a completely different data set.
+ 
+ What I would do next is to sample from the training data using a normal distribution where in the middle of the distribution lies the signs with highest frequencies, and in the both ends, lies the signs with less frequencies, this permits signs with lower frequencies to be seen enough during the training phase.
+ 
 
 ###Test a Model on New Images
 
@@ -153,41 +156,90 @@ Using a combination of convolutions and activations and full connected networks,
 
 Here are five German traffic signs that I found on the web:
 
-![alt text][image4] ![alt text][image5] ![alt text][image6] 
-![alt text][image7] ![alt text][image8]
+![alt text][image5] ![alt text][image6] ![alt text][image7] 
+![alt text][image8] ![alt text][image9]
 
-The first image might be difficult to classify because ...
+The last image might be difficult to classify because the arrows look different than the one I used during the training phase, and I did this intentionally to see how good the generalization is, but it was not that good, I need to work on this more later.
 
 ####2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. Identify where in your code predictions were made. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
-The code for making predictions on my final model is located in the tenth cell of the Ipython notebook.
+The code for making predictions on my final model is located in the tenth cell of the Ipython notebook. The accuracy of the validation data is about %93 and for test data it was maximum %60, I think it's because the test data was taken from a different angel or using a different device, or stored with a different image quality. 
 
 Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| U-turn     			| U-turn 										|
-| Yield					| Yield											|
-| 100 km/h	      		| Bumpy Road					 				|
-| Slippery Road			| Slippery Road      							|
+| Speed limit 20 km      		| 0%   									| 
+| Speed limit 50 km     			| 0% 										|
+| Speed limit 80 km					| 100%										|
+| No entry allowed      		|100% 				 				|
+| Roundabout mandatory		| 0%  							|
 
 
-The model was able to correctly guess 4 of the 5 traffic signs, which gives an accuracy of 80%. This compares favorably to the accuracy on the test set of ...
+The model was able to correctly guess 2 of the 5 traffic signs, which gives an accuracy of 40%.
 
 ####3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction and identify where in your code softmax probabilities were outputted. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
 The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
 
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
+For the first image, 'Speed limit 20 km' the model gives highest probability to 'Go straight or left ' which is 0.43, and the image does not contain 20 km sign. The top five soft max probabilities were
 
 | Probability         	|     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
+| .43         			| Go straight or left   									| 
+| .34    				| Traffic signals 										|
+| .26				| Speed limit (50km/h)											|
+| .19	      			| Road work					 				|
+| .16				    | Wild animals crossing    							|
+
+For the second image, 'Speed limit 50 km' the model gives highest probability to 'Go straight or left ' which is 0.19, and the image does contain a 50 km sign but it's in the highest probability. The top five soft max probabilities were
+
+| Probability         	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| .19         			| Go straight or left   									| 
+| .15    				| Traffic signals 										|
+| .11				| Speed limit (50km/h)											|
+| .08	      			| Children crossing				 				|
+| .07				    | Road work   							|
 
 
-For the second image ... 
+For the third image, 'Speed limit 80 km' the model gives highest probability to 'Go straight or left ' which is 0.33, and the image does contain a 80 km sign but it's in the highest probability. The top five soft max probabilities were
+
+NOTE:This looks strange for me, as this sign was correctly classified during the test phase, it could be that I do something wrong with the softmax generation.
+
+| Probability         	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| .33         			| Go straight or left   									| 
+| .26    				| Traffic signals 										|
+| .21				| Speed limit (50km/h)											|
+| .12	      			| Keep right			 				|
+| .11				    | Speed limit (80km/h) 							|
+
+For the forth image, 'No entry' the model gives highest probability to 'Go straight or left ' which is 0.18, and the image does not contain a 'No-entry' sign . The model is not confident in any of the 5 outputs.
+
+NOTE:This looks strange for me, as this sign was correctly classified during the test phase, it could be that I do something wrong with the softmax generation.
+
+The top five soft max probabilities were
+
+| Probability         	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| .18         			| Go straight or left   									| 
+| .11    				| Speed limit (50km/h)	 										|
+| .10				| 		Traffic signals								|
+| .09	      			| Vehicles over 3.5 metric tons prohibited		 				|
+| .06				    | Road work							|
+
+
+For the fifth image, 'roundabout mandatory' the model gives highest probability to 'Go straight or left ' which is 0.36, and the image does not contain a roundabout mandatory' sign . The top five soft max probabilities were
+
+| Probability         	|     Prediction	        					| 
+|:---------------------:|:---------------------------------------------:| 
+| .36         			| Go straight or left   									| 
+| .24    				| Traffic signals 										|
+| .22				| 		Speed limit (50km/h)									|
+| .14	      			| Keep right		 				|
+| .10				    | Children crossing							|
+
+
+
+
