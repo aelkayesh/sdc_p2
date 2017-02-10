@@ -14,10 +14,10 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./doc/vis1.png "Visualization of training input after converting to grayscale"
-[image2]: ./doc/vis2.png "Visualization of test input in grayscale"
-[image3]: ./doc/vis3.png "Visualization of training input after masking"
-[image3]: ./doc/vis4.png "Visualization of test input after masking"
+[image1]: ./doc/vis1.PNG "Visualization of training input after converting to grayscale"
+[image2]: ./doc/vis2.PNG "Visualization of test input in grayscale"
+[image3]: ./doc/vis3.PNG "Visualization of training input after masking"
+[image4]: ./doc/vis4.PNG "Visualization of test input after masking"
 [image5]: ./20km.png "Traffic Sign 1"
 [image6]: ./50km.png "Traffic Sign 2"
 [image7]: ./80km.png "Traffic Sign 3"
