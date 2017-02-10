@@ -31,11 +31,10 @@ The goals / steps of this project are the following:
 
 ####1. Provide a Writeup / README that includes all the rubric points and how you addressed each one. You can submit your writeup as markdown or pdf. You can use this template as a guide for writing the report. The submission includes the project code.
 
-<<<<<<< HEAD
-You're reading it! and here is a link to my [project code](https://github.com/localmaxima/sdc_p2/master/Traffic_Sign_Classifier.ipynb)
-=======
-You're reading it! and here is a link to my [project code](https://github.com/localmaxima/sdc_p2/Traffic_Sign_Classifier.ipynb)
->>>>>>> 3a6887c30b75b7f77e24cae36741aa9ae147995a
+
+You're reading it! and here is a link to my [project code](https://github.com/localmaxima/sdc_p2/blob/master/Traffic_Sign_Classifier.ipynb)
+
+
 
 ###Data Set Summary & Exploration
 
