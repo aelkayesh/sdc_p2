@@ -5,6 +5,7 @@
 
 The goals / steps of this project are the following:
 * Load the data set (see below for links to the project data set)
+* augment the data set by adding new images out of the existing ones by transforming them(scale/shift/rotate)
 * Explore, summarize and visualize the data set
 * Design, train and test a model architecture
 * Use the model to make predictions on new images
@@ -46,8 +47,9 @@ The code for this step is contained in the second code cell of the IPython noteb
 I used python to count frequencies of training data set and to calculate summary statistics of the traffic
 signs data set:
 
-* The size of training set is 39209
-* The size of test set is 5
+* The size of training set is 106345
+* The size of the validation set is 52380
+* The size of test set is 12630
 * The shape of a traffic sign image is (32,32)
 * The number of unique classes/labels in the data set is 43
 
@@ -65,7 +67,9 @@ Here is an exploratory visualization of the data set. It's rendering of all uniq
 
 The code for this step is contained in the fourth code cell of the IPython notebook.
 
-As a first step, I decided to convert the images to grayscale because it's easier to manipulate 1 channel than the three RGB channels.
+After visualizing the data set , I found that some labels have more images than the others (2200 images for the highest one vs 200 images for the lowest one), I used an image transformation lib to randomly generate a transformed image out of the original one and add it to the data set. For each label, I calcualte the number of transformations that should be applied on it based on how far it is from the label with max frequency, for example, if the 20 km speed limit sign has 2000 images and turn right has just 200, for each images in the turn right sign, I makde 10 transformations and add it to the training set. 
+
+I decided to convert the images to grayscale because it's easier to manipulate one channel than the three RGB channels.
 
 Before normalization I tried adding a mask to give higher weights to the pixles in the center and the weights gradually decrease as we approache the edges. I think I need to work on the mask a bit more later, for the moment, I disabled it. The reason for thinking about a mask here, is that I noticed that in the training set, the traffic signs does not fill the whole 32x32 images, the sign itself is in the center but it does not fill the whole image, so it's good to get rid of the surroundings.
 
@@ -78,9 +82,9 @@ As a last step, I normalized the image data because this makes the network focus
 
 The code for splitting the data into training and validation sets is contained in the fifth code cell of the IPython notebook.  
 
-To cross validate my model, I randomly split the training data into a training set and validation set. I did this by creating two differnt lists from two different files, train.p and test.p 
+To cross validate my model, I randomly split the training data into a training set and validation set on a 2/1 scale. I did this by using the train_test_split method from sklearn.cross_validation. I kept the test set unused until I became sure the model has learnt enough.
 
-My final training set had 5 number of images. My validation set had over 1000 images.
+My final test set had 12630 images. My validation set had over 52380 images.
 
 Here is how the test images looked like after applying grayscale...
 
@@ -102,6 +106,7 @@ My final model consisted of the following layers:
 |:---------------------:|:---------------------------------------------:| 
 | Input         		| 32x32x1 grayscal image   							| 
 | Convolution 5x5     	| 1x1 stride, same padding, outputs 28x28x6 	|
+| DROPOUT					|												|
 | RELU					|												|
 | Max pooling	      	| 2x2 stride,  outputs 14x14x6 				|
 | Convolution 5x5     	| 1x1 stride, same padding, outputs 10x10x16 	|
@@ -110,6 +115,7 @@ My final model consisted of the following layers:
 | Fully connected		| input 400,  outputs 120								|
 | RELU					|												|
 | Fully connected		| input 120,  outputs 84								|
+| DROPOUT					|												|
 | RELU					|									
 | Fully connected		| input 84,  outputs 43								| 
 
@@ -127,8 +133,10 @@ The code for calculating the accuracy of the model is located in the ninth cell 
 
 My final model results were:
 *training set accuracy up to %99.4
-* validation set accuracy of %93
+* validation set accuracy of %
 * test set accuracy ranging between %20 and %60 (I didn't re-run the test phase, it was a complete restart of the kernel)
+
+Training and validation accuracy were doing both well, approaching 99%, which means the model was learning well. The testing accuracy reached % which i
 
 If an iterative approach was chosen:
 * What was the first architecture that was tried and why was it chosen?
