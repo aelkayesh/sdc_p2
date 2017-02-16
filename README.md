@@ -150,28 +150,11 @@ The first image might be difficult to classify because maybe it was brighter tha
 The code for making predictions on my final model is located in the tenth cell of the Ipython notebook. The accuracy of the images downloaded from the  web (using google street view) is about %79.
 
 Here are the results of the prediction:
-Test Accuracy = 1.000
-Test Accuracy = 1.000
-Test Accuracy = 1.000
-Test Accuracy = 0.000
-Test Accuracy = 1.000
-Test Accuracy = 0.000
-Test Accuracy = 1.000
-Test Accuracy = 1.000
-Test Accuracy = 1.000
-Test Accuracy = 1.000
-Test Accuracy = 1.000
-Test Accuracy = 1.000
-Test Accuracy = 1.000
-Test Accuracy = 0.000
 
 | Image			        |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Speed limit 30 km      		| 100%   									| 
-| Speed limit 30 km     			| 100% 										|
-| Speed limit 30 km					| 100%										|
-| Speed limit 50 km      		| 0% 				 				|
-| Speed limit 50 km		| 100%  							|
+| Speed limit 30 km      		| 100%   									|  out of 3 images
+| Speed limit 50 km      		| 50% 				 				| out of 2 images
 |Right-of-way at the next intersection      		| 0%   									| 
 | Yield     			| 100% 										|
 | STOP				| 100%										|
