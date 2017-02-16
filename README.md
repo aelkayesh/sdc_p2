@@ -110,7 +110,7 @@ To train the model, I used softmax cross entropy to calculate the loss, then the
 The code for calculating the accuracy of the model is located in the ninth cell of the Ipython notebook.
 
 My final model results were:
-*training set accuracy up to %93
+* training set accuracy up to %93
 * validation set accuracy of %86
 * test set accuracy 91%
 
