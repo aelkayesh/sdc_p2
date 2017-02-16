@@ -15,15 +15,10 @@ The goals / steps of this project are the following:
 
 [//]: # (Image References)
 
-[image1]: ./doc/vis1.PNG "Visualization of training input after converting to grayscale"
-[image2]: ./doc/vis2.PNG "Visualization of test input in grayscale"
-[image3]: ./doc/vis3.PNG "Visualization of training input after masking"
-[image4]: ./doc/vis4.PNG "Visualization of test input after masking"
-[image5]: ./20km.png " Speed limit 20 km"
-[image6]: ./50km.png " Speed limit 50 km"
-[image7]: ./80km.png " Speed limit 80 km"
-[image8]: ./noentry.png "No entry"
-[image9]: ./roundabout.png "Roundabout mandatory"
+[image1]: ./sample.png " sample input after grayscale"
+[image2]: ./test_web.png "test images from the web"
+[image3]: ./softmax.png "softmax probabilities"
+
 
 ## Rubric Points
 ###Here I will consider the [rubric points](https://review.udacity.com/#!/rubrics/481/view) individually and describe how I addressed each point in my implementation.  
@@ -70,13 +65,7 @@ The code for this step is contained in the fourth code cell of the IPython noteb
 After visualizing the data set , I found that some labels have more images than the others (2200 images for the highest one vs 200 images for the lowest one), I used an image transformation lib to randomly generate a transformed image out of the original one and add it to the data set. For each label, I calcualte the number of transformations that should be applied on it based on how far it is from the label with max frequency, for example, if the 20 km speed limit sign has 2000 images and turn right has just 200, for each images in the turn right sign, I makde 10 transformations and add it to the training set. 
 
 I decided to convert the images to grayscale because it's easier to manipulate one channel than the three RGB channels.
-
-Before normalization I tried adding a mask to give higher weights to the pixles in the center and the weights gradually decrease as we approache the edges. I think I need to work on the mask a bit more later, for the moment, I disabled it. The reason for thinking about a mask here, is that I noticed that in the training set, the traffic signs does not fill the whole 32x32 images, the sign itself is in the center but it does not fill the whole image, so it's good to get rid of the surroundings.
-
-Here is how the input looks after applying the mask
-![alt text][image3]
-
-As a last step, I normalized the image data because this makes the network focus on pixels with higher intensities
+After that, I normalized the image data because this way it's easier for weights to be shared accorss different images with different intensities.
 
 ####2. Describe how, and identify where in your code, you set up training, validation and testing data. How much data was in each set? Explain what techniques were used to split the data into these sets. (OPTIONAL: As described in the "Stand Out Suggestions" part of the rubric, if you generated additional data for training, describe why you decided to generate additional data, how you generated the data, identify where in your code, and provide example images of the additional data)
 
@@ -85,16 +74,6 @@ The code for splitting the data into training and validation sets is contained i
 To cross validate my model, I randomly split the training data into a training set and validation set on a 2/1 scale. I did this by using the train_test_split method from sklearn.cross_validation. I kept the test set unused until I became sure the model has learnt enough.
 
 My final test set had 12630 images. My validation set had over 52380 images.
-
-Here is how the test images looked like after applying grayscale...
-
-![alt text][image2]
-
-
-and then after applying masking...
-
-![alt text][image4]
-
 
 ####3. Describe, and identify where in your code, what your final model architecture looks like including model type, layers, layer sizes, connectivity, etc.) Consider including a diagram and/or table describing the final model.
 
@@ -115,7 +94,6 @@ My final model consisted of the following layers:
 | Fully connected		| input 400,  outputs 120								|
 | RELU					|												|
 | Fully connected		| input 120,  outputs 84								|
-| DROPOUT					|												|
 | RELU					|									
 | Fully connected		| input 84,  outputs 43								| 
 
@@ -132,11 +110,11 @@ To train the model, I used softmax cross entropy to calculate the loss, then the
 The code for calculating the accuracy of the model is located in the ninth cell of the Ipython notebook.
 
 My final model results were:
-*training set accuracy up to %99.4
-* validation set accuracy of %
-* test set accuracy ranging between %20 and %60 (I didn't re-run the test phase, it was a complete restart of the kernel)
+*training set accuracy up to %93
+* validation set accuracy of %86
+* test set accuracy 91%
 
-Training and validation accuracy were doing both well, approaching 99%, which means the model was learning well. The testing accuracy reached % which i
+Training and validation accuracy were doing ok, The testing accuracy reached 91% which means that the training set could cover a lot of cases in the test test
 
 If an iterative approach was chosen:
 * What was the first architecture that was tried and why was it chosen?
@@ -164,89 +142,56 @@ Using a combination of convolutions and activations and full connected networks,
 
 Here are five German traffic signs that I found on the web:
 
-![alt text][image5] ![alt text][image6] ![alt text][image7] 
-![alt text][image8] ![alt text][image9]
-
-The last image might be difficult to classify because the arrows look different than the one I used during the training phase, and I did this intentionally to see how good the generalization is, but it was not that good, I need to work on this more later.
+![alt text][image2]
+The first image might be difficult to classify because maybe it was brighter than similar class images.
 
 ####2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. Identify where in your code predictions were made. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
-The code for making predictions on my final model is located in the tenth cell of the Ipython notebook. The accuracy of the validation data is about %93 and for test data it was maximum %60, I think it's because the test data was taken from a different angel or using a different device, or stored with a different image quality. 
+The code for making predictions on my final model is located in the tenth cell of the Ipython notebook. The accuracy of the images downloaded from the  web (using google street view) is about %79.
 
 Here are the results of the prediction:
+Test Accuracy = 1.000
+Test Accuracy = 1.000
+Test Accuracy = 1.000
+Test Accuracy = 0.000
+Test Accuracy = 1.000
+Test Accuracy = 0.000
+Test Accuracy = 1.000
+Test Accuracy = 1.000
+Test Accuracy = 1.000
+Test Accuracy = 1.000
+Test Accuracy = 1.000
+Test Accuracy = 1.000
+Test Accuracy = 1.000
+Test Accuracy = 0.000
 
 | Image			        |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Speed limit 20 km      		| 0%   									| 
-| Speed limit 50 km     			| 0% 										|
-| Speed limit 80 km					| 100%										|
-| No entry allowed      		|100% 				 				|
-| Roundabout mandatory		| 0%  							|
+| Speed limit 30 km      		| 100%   									| 
+| Speed limit 30 km     			| 100% 										|
+| Speed limit 30 km					| 100%										|
+| Speed limit 50 km      		| 0% 				 				|
+| Speed limit 50 km		| 100%  							|
+|Right-of-way at the next intersection      		| 0%   									| 
+| Yield     			| 100% 										|
+| STOP				| 100%										|
+| Vehicles over 3.5 metric tons prohibited     		|100% 				 				|
+| No entry		| 100%  							|
+| Roadwork      		| 100%   									| 
+| Children crossing     			| 100% 										|
+| Go straight or right				| 100%										|
+| Keep right     		| 0% 				 				|
 
 
-The model was able to correctly guess 2 of the 5 traffic signs, which gives an accuracy of 40%.
+The model was able to correctly guess 11 of the 14 traffic signs, which gives an accuracy of 79%.
 
 ####3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction and identify where in your code softmax probabilities were outputted. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
 
 The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
 
-For the first image, 'Speed limit 20 km' the model gives highest probability to 'Go straight or left ' which is 0.43, and the image does not contain 20 km sign. The top five soft max probabilities were
+I created some visulaization that will explain how sure was the model of the predicted sign and which were the next probable choices
 
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| .43         			| Go straight or left   									| 
-| .34    				| Traffic signals 										|
-| .26				| Speed limit (50km/h)											|
-| .19	      			| Road work					 				|
-| .16				    | Wild animals crossing    							|
-
-For the second image, 'Speed limit 50 km' the model gives highest probability to 'Go straight or left ' which is 0.19, and the image does contain a 50 km sign but it's in the highest probability. The top five soft max probabilities were
-
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| .19         			| Go straight or left   									| 
-| .15    				| Traffic signals 										|
-| .11				| Speed limit (50km/h)											|
-| .08	      			| Children crossing				 				|
-| .07				    | Road work   							|
-
-
-For the third image, 'Speed limit 80 km' the model gives highest probability to 'Go straight or left ' which is 0.33, and the image does contain a 80 km sign but it's in the highest probability. The top five soft max probabilities were
-
-NOTE:This looks strange for me, as this sign was correctly classified during the test phase, it could be that I do something wrong with the softmax generation.
-
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| .33         			| Go straight or left   									| 
-| .26    				| Traffic signals 										|
-| .21				| Speed limit (50km/h)											|
-| .12	      			| Keep right			 				|
-| .11				    | Speed limit (80km/h) 							|
-
-For the forth image, 'No entry' the model gives highest probability to 'Go straight or left ' which is 0.18, and the image does not contain a 'No-entry' sign . The model is not confident in any of the 5 outputs.
-
-NOTE:This looks strange for me, as this sign was correctly classified during the test phase, it could be that I do something wrong with the softmax generation.
-
-The top five soft max probabilities were
-
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| .18         			| Go straight or left   									| 
-| .11    				| Speed limit (50km/h)	 										|
-| .10				| 		Traffic signals								|
-| .09	      			| Vehicles over 3.5 metric tons prohibited		 				|
-| .06				    | Road work							|
-
-
-For the fifth image, 'roundabout mandatory' the model gives highest probability to 'Go straight or left ' which is 0.36, and the image does not contain a roundabout mandatory' sign . The top five soft max probabilities were
-
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| .36         			| Go straight or left   									| 
-| .24    				| Traffic signals 										|
-| .22				| 		Speed limit (50km/h)									|
-| .14	      			| Keep right		 				|
-| .10				    | Children crossing							|
+![alt text][image3]
 
 
 
