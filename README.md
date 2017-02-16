@@ -114,7 +114,7 @@ My final model results were:
 * validation set accuracy of %86
 * test set accuracy 91%
 
-Training and validation accuracy were doing ok, The testing accuracy reached 91% which means that the training set could cover a lot of cases in the test test
+Training and validation accuracy were doing ok, The testing accuracy reached 91% which means that the training set could cover a lot of cases in the test set
 
 If an iterative approach was chosen:
 * What was the first architecture that was tried and why was it chosen?
