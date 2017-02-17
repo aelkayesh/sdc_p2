@@ -187,6 +187,8 @@ The next 8 images were for the 'Yield', 'Stop', 'Vehicles over 3.5 metric tons p
 
 Seeing these results, I get the impression that it could be the signs contains numeric speed limits that confuses the model because with low quality images, they could sometimes look similar...
 
+Also, Althought the web images set is not performing well as the test/validation, the results are still ok and we should be safe from overfitting.
+
 
 ![alt text][image3]
 
