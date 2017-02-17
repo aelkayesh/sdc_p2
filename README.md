@@ -140,14 +140,14 @@ Using a combination of convolutions and activations and full connected networks,
 
 ####1. Choose five German traffic signs found on the web and provide them in the report. For each image, discuss what quality or qualities might be difficult to classify.
 
-Here are five German traffic signs that I found on the web:
+Here are 14 German traffic signs that I found on the web:
 
 ![alt text][image2]
 The first image might be difficult to classify because maybe it was brighter than similar class images.
 
 ####2. Discuss the model's predictions on these new traffic signs and compare the results to predicting on the test set. Identify where in your code predictions were made. At a minimum, discuss what the predictions were, the accuracy on these new predictions, and compare the accuracy to the accuracy on the test set (OPTIONAL: Discuss the results in more detail as described in the "Stand Out Suggestions" part of the rubric).
 
-The code for making predictions on my final model is located in the tenth cell of the Ipython notebook. The accuracy of the images downloaded from the  web (using google street view) is about %79.
+The code for making predictions on my final model is located in the tenth cell of the Ipython notebook. The accuracy of the images downloaded from the  web (using google street view) is about %79. The accuracy on the test set was 91%. There is about a 12% less accuracy on the web images test. This can be an early indication of overfitting, I may try to increase the number of web images in the test and get more accurate results later. For the moment, I think the web images set accuracy is ok compared to the test set given the relatively small number of images(about 14).
 
 Here are the results of the prediction:
 
@@ -173,6 +173,10 @@ The model was able to correctly guess 11 of the 14 traffic signs, which gives an
 The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
 
 I created some visulaization that will explain how sure was the model of the predicted sign and which were the next probable choices
+
+Let's see how sure is the model in its predictions in 5 different images of the web images set:
+
+The first image is the 'speed limit 30 km' one
 
 ![alt text][image3]
 
